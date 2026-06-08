@@ -59,5 +59,8 @@ coverage.xml
 CLAUDE.md
 AGENTS.md
 
+# ---- Personal study notes / explainers (not for the public artifact) ----
+notes/
+
 # ---- Misc ----
 *.log
