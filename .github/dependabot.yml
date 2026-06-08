@@ -1,0 +1,35 @@
+version: 2
+
+# Dependabot keeps three things current so our pinning never goes stale:
+#   - pip            : the Python dependencies in requirements*.txt
+#   - github-actions : the SHA-pinned actions in .github/workflows/* (bumps the
+#                      pin AND the trailing "# vX" comment)
+#   - docker         : the base image in the Dockerfile
+updates:
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    labels: ["dependencies", "python"]
+    # One PR for routine minor/patch bumps to cut review noise; majors stay
+    # separate so a potentially-breaking change gets its own review.
+    groups:
+      python-minor-patch:
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    labels: ["dependencies", "github-actions"]
+    groups:
+      actions-minor-patch:
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+    labels: ["dependencies", "docker"]
