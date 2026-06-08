@@ -1,6 +1,6 @@
 # Pin the base by tag here for readability; the pipeline + Dependabot keep it
 # current, and you'd pin by sha256 digest in production (see README "Looking ahead").
-FROM python:3.12-slim AS build
+FROM python:3.14-slim AS build
 
 WORKDIR /app
 ENV PIP_NO_CACHE_DIR=1 PIP_DISABLE_PIP_VERSION_CHECK=1
@@ -10,7 +10,7 @@ COPY requirements.txt .
 RUN pip install --prefix=/install -r requirements.txt
 
 # ---- Final stage: no build tooling, no pip, runs as an unprivileged user ----
-FROM python:3.12-slim AS runtime
+FROM python:3.14-slim AS runtime
 
 # Drop privileges: create a dedicated non-root user.
 RUN useradd --create-home --uid 10001 appuser
