@@ -16,3 +16,6 @@ select = ["E", "F", "I", "B", "UP", "S"]
 [tool.pytest.ini_options]
 addopts = "-q"
 testpaths = ["tests"]
+# Put the repo root on sys.path so `from app.main import app` resolves without
+# an editable install (we run bare `pytest` in CI).
+pythonpath = ["."]
