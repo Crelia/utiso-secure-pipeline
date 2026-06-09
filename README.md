@@ -64,11 +64,12 @@ On push to `main` (and version tags):
    registry alongside the image.
 
 "Deploy" here means publishing a signed, attested container image to GHCR. The
-image is verifiable end-to-end:
+image is verifiable end-to-end (the GHCR package must be public for an anonymous
+pull; note the image path is lowercase):
 
 ```bash
-cosign verify ghcr.io/<owner>/utiso-secure-pipeline@<digest> \
-  --certificate-identity-regexp "https://github.com/<owner>/utiso-secure-pipeline/.*" \
+cosign verify ghcr.io/crelia/utiso-secure-pipeline:latest \
+  --certificate-identity-regexp "https://github.com/Crelia/utiso-secure-pipeline/.*" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
@@ -95,18 +96,20 @@ These live in repo settings, not in YAML, and should be enabled:
 - Secret scanning + push protection (on by default for public repos).
 - Restrict Actions to the workflows in this repo + verified creators.
 
-## Before you push (one-time hardening)
+## Action pinning and maintenance
 
-Actions are referenced by version tag for readability. **Pin them to commit
-SHAs** so a compromised or re-tagged action can't silently change what runs —
-this is a one-liner with [`pinact`](https://github.com/suzuki-shunsuke/pinact)
-(or StepSecurity's Secure Workflow):
+Third-party Actions are pinned to full commit SHAs with a trailing version
+comment, for example:
 
-```bash
-pinact run   # rewrites each `@vX` to `@<sha>  # vX`; Dependabot keeps the sha fresh
+```yaml
+uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 ```
 
-Also confirm the action versions resolve in your account before the final push.
+The SHA is the security control: it points to immutable code, so a compromised or
+re-tagged `@v6` cannot silently change what this pipeline runs. The comment keeps
+the workflow readable for humans. Dependabot's `github-actions` updater keeps
+those pins current by opening PRs that move the SHA and update the version
+comment together.
 
 ## Looking ahead (knowingly simplified for this exercise)
 
