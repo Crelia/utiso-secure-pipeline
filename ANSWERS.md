@@ -1,3 +1,7 @@
+# Take-home challenge answers
+
+Written answers to the five questions, to accompany the public repository.
+
 ## 1. Overview
 
 This repository is a deliberately small FastAPI service used to demonstrate a
@@ -66,19 +70,30 @@ restricted Actions policy so only trusted Actions can run.
 
 ## 3. AI usage
 
-I used AI tooling as a pair-programming and review aid while building this repository. Specifically, I used Anthropic Claude via Claude Code and OpenAI GPT-5.5 to help brainstorm the pipeline design, review workflow structure, draft documentation, and sanity-check security tradeoffs.
+I used AI tooling as a pair-programming and review aid while building this
+repository. Specifically, I used Anthropic Claude via Claude Code and OpenAI
+GPT-5.5 to help brainstorm the pipeline design, review workflow structure, draft
+documentation, and sanity-check security tradeoffs.
 
-I treated AI output as draft material rather than as final authority. I reviewed the workflows, tested the repository, confirmed the Actions ran successfully, verified the image was published to GHCR, and made the final implementation decisions myself.
+I treated AI output as draft material rather than as final authority. I reviewed
+the workflows, tested the repository, confirmed the Actions ran successfully,
+verified the image was published to GHCR, and made the final implementation
+decisions myself.
 
 AI was most useful for:
-- comparing security controls that would fit the scope of the challenge without overbuilding it;
+
+- comparing security controls that would fit the scope of the challenge without
+  overbuilding it;
 - iterating on GitHub Actions workflow structure;
 - reviewing README/ANSWERS wording for clarity;
 - helping troubleshoot small implementation issues during development.
 
-One concrete example: the release gate caught a fixable HIGH/CRITICAL dependency vulnerability before publishing. I reviewed the finding, updated the dependency, and reran the pipeline to confirm the gate behaved as intended.
+One concrete example: the release gate caught a fixable HIGH/CRITICAL dependency
+vulnerability before publishing. I reviewed the finding, updated the dependency,
+and reran the pipeline to confirm the gate behaved as intended.
 
-I intentionally kept the application small so I can read, explain, and defend every line during a walkthrough.
+I intentionally kept the application small so I can read, explain, and defend
+every line during a walkthrough.
 
 ## 4. Looking ahead
 
