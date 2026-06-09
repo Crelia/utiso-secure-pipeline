@@ -52,7 +52,9 @@ and weekly on a schedule so newly published rules are applied to existing code.
 Results land in the repo's **Security** tab.
 
 ### `release.yml` — build, scan, publish, sign, attest (deploy)
-On push to `main` (and version tags):
+On push to `main` that changes the image (the app, `Dockerfile`, or runtime
+`requirements.txt`), or via manual dispatch — a docs-only commit doesn't
+rebuild/re-sign the container:
 1. Build the image and **load it locally**.
 2. **Scan with Trivy and fail closed** — a HIGH/CRITICAL vuln stops the image
    from ever being published.
