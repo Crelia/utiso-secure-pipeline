@@ -2,9 +2,11 @@
 
 This repository is a deliberately small FastAPI service used to demonstrate a
 security-focused CI/CD pipeline in GitHub Actions. The app exposes a health check,
-a version endpoint, and a bounded SHA-256 hashing endpoint. The application is
-intentionally simple because the exercise evaluates the pipeline and security
-choices rather than application complexity.
+a version endpoint, and a bounded SHA-256 hashing endpoint. Keeping the app tiny
+is a deliberate tradeoff, not a shortcut: it let me make the pipeline thorough —
+two layers, securing the code and securing the supply chain — without it becoming
+sprawling. The exercise evaluates the pipeline and the security choices, not
+application complexity.
 
 I created three workflows:
 
