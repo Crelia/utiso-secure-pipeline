@@ -67,9 +67,10 @@ restricted Actions policy so only trusted Actions can run.
 I used two AI coding agents in this repository as pair programmers and reviewers,
 not as unchecked generators: Anthropic's Claude (via Claude Code, running Opus)
 and OpenAI's GPT-5.5. I kept one set of project instructions that both agents
-read — `CLAUDE.md` for Claude and an identical `AGENTS.md` for the OpenAI agent —
-so the constraints (least privilege, SHA-pinned Actions, fail-closed scanning,
-no committed secrets) stayed consistent no matter which agent I was working with.
+read — a `CLAUDE.md` for Claude and an identical `AGENTS.md` for the OpenAI
+agent, both kept out of the published repository as internal scaffolding — so the
+constraints (least privilege, SHA-pinned Actions, fail-closed scanning, no
+committed secrets) stayed consistent no matter which agent I was working with.
 
 I used them for three things: documentation (drafting and refining the README,
 this file, and my own study notes), development (scaffolding and iterating on the

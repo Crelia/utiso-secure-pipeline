@@ -89,11 +89,15 @@ Two layers, deliberately:
 
 ## Repository settings that complete the picture
 
-These live in repo settings, not in YAML, and should be enabled:
-- **Branch protection** on `main`: require PR review, require CI + CodeQL to
-  pass, no force-push.
-- **Require signed commits**.
+Some of this lives in repo settings, not in YAML. Already enabled on this repo:
+- **Branch protection** on `main`: changes must go through a pull request, the CI
+  and CodeQL checks (lint/test, secret scan, dependency scan, CodeQL analysis)
+  must pass before merging, and force-pushes and branch deletion are blocked.
 - Secret scanning + push protection (on by default for public repos).
+
+Still recommended to add:
+- **Require signed commits** (once commit signing is set up so it doesn't block
+  existing history).
 - Restrict Actions to the workflows in this repo + verified creators.
 
 ## Action pinning and maintenance
