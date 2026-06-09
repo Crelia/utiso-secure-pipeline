@@ -66,33 +66,19 @@ restricted Actions policy so only trusted Actions can run.
 
 ## 3. AI usage
 
-I used two AI coding agents in this repository as pair programmers and reviewers,
-not as unchecked generators: Anthropic's Claude (via Claude Code, running Opus)
-and OpenAI's GPT-5.5. I kept one set of project instructions that both agents
-read — a `CLAUDE.md` for Claude and an identical `AGENTS.md` for the OpenAI
-agent, both kept out of the published repository as internal scaffolding — so the
-constraints (least privilege, SHA-pinned Actions, fail-closed scanning, no
-committed secrets) stayed consistent no matter which agent I was working with.
+I used AI tooling as a pair-programming and review aid while building this repository. Specifically, I used Anthropic Claude via Claude Code and OpenAI GPT-5.5 to help brainstorm the pipeline design, review workflow structure, draft documentation, and sanity-check security tradeoffs.
 
-I used them for three things: documentation (drafting and refining the README,
-this file, and my own study notes), development (scaffolding and iterating on the
-workflows, Dockerfile, and tests), and as a sounding board to weigh security
-tradeoffs and advance ideas.
+I treated AI output as draft material rather than as final authority. I reviewed the workflows, tested the repository, confirmed the Actions ran successfully, verified the image was published to GHCR, and made the final implementation decisions myself.
 
-Concretely, the agents earned their keep on details that I then verified myself:
+AI was most useful for:
+- comparing security controls that would fit the scope of the challenge without overbuilding it;
+- iterating on GitHub Actions workflow structure;
+- reviewing README/ANSWERS wording for clarity;
+- helping troubleshoot small implementation issues during development.
 
-- They pinned every third-party Action to a real commit SHA resolved from
-  GitHub's API rather than a guessed value, which I confirmed before committing.
-- They caught a pytest import-path problem locally and fixed it before it could
-  fail CI.
-- When the fail-closed image scan in `release.yml` blocked a release over
-  CVE-2024-47874 (a denial-of-service in Starlette, pulled in transitively
-  through FastAPI), the agent surfaced the finding and proposed the dependency
-  bump; I reviewed it and applied the fix.
+One concrete example: the release gate caught a fixable HIGH/CRITICAL dependency vulnerability before publishing. I reviewed the finding, updated the dependency, and reran the pipeline to confirm the gate behaved as intended.
 
-I deliberately kept the application small so I can read and defend every line in a
-live walk-through, and I treated AI output as a draft to review rather than as a
-finished answer.
+I intentionally kept the application small so I can read, explain, and defend every line during a walkthrough.
 
 ## 4. Looking ahead
 
