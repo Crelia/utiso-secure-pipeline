@@ -5,6 +5,9 @@ pipeline** on GitHub Actions. The app is deliberately tiny (a vehicle, not the
 point) *so that* the pipeline can be thorough without becoming sprawling. The
 interesting work is in `.github/workflows/`.
 
+> Written answers to the challenge's five questions are in
+> [`ANSWERS.md`](ANSWERS.md).
+
 ## The application
 
 A JSON API with three endpoints:
