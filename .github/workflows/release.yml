@@ -1,9 +1,16 @@
 name: Release
 
 on:
+  # Only (re)publish when something that actually changes the image changes.
+  # A docs-only or test-only commit shouldn't rebuild and re-sign the container.
   push:
     branches: [main]
-    tags: ["v*"]
+    paths:
+      - "app/**"
+      - "Dockerfile"
+      - "requirements.txt"
+      - ".github/workflows/release.yml"
+  # Manual trigger is always available for an on-demand publish.
   workflow_dispatch: {}
 
 # Read-only by default; the single job widens exactly what the publish needs.
